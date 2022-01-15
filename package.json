@@ -1,0 +1,11 @@
+{
+  "name": "openapi-superstruct",
+  "version": "0.0.1",
+  "description": "NodeJS library for generating Superstruct model definitions from OpenAPI specs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "samgqroberts",
+  "license": "MIT"
+}
