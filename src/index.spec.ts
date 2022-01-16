@@ -10,10 +10,16 @@ describe('generate', () => {
 
 import * as s from 'superstruct';
 
-export const sModelOne = s.object({
+const struct_ModelOne = s.object({
   string_field_one: s.string(),
   string_field_two: s.optional(s.string()),
 });
+
+export const structs = {
+  ModelOne: struct_ModelOne,
+};
+
+export type ModelOne = s.Infer<typeof structs['ModelOne']>;
 `);
     });
     it('case: one-model-all-primitives', async () => {
@@ -24,7 +30,7 @@ export const sModelOne = s.object({
 
 import * as s from 'superstruct';
 
-export const sModelOne = s.object({
+const struct_ModelOne = s.object({
   required_string: s.string(),
   required_nullable_string: s.nullable(s.string()),
   optional_string: s.optional(s.string()),
@@ -78,6 +84,12 @@ export const sModelOne = s.object({
   optional_boolean: s.optional(s.boolean()),
   optional_nullable_boolean: s.optional(s.nullable(s.boolean())),
 });
+
+export const structs = {
+  ModelOne: struct_ModelOne,
+};
+
+export type ModelOne = s.Infer<typeof structs['ModelOne']>;
 `);
     });
     it('case: one-model-complex-types', async () => {
@@ -88,7 +100,7 @@ export const sModelOne = s.object({
 
 import * as s from 'superstruct';
 
-export const sModelOne = s.object({
+const struct_ModelOne = s.object({
   required_array<string>: s.array(s.string()),
   required_nullable_array<string>: s.nullable(s.array(s.string())),
   optional_array<string>: s.optional(s.array(s.string())),
@@ -104,6 +116,12 @@ export const sModelOne = s.object({
     }),
   }),
 });
+
+export const structs = {
+  ModelOne: struct_ModelOne,
+};
+
+export type ModelOne = s.Infer<typeof structs['ModelOne']>;
 `);
     });
     it('case: multiple-models-top-level-primitives', async () => {
@@ -114,19 +132,49 @@ export const sModelOne = s.object({
 
 import * as s from 'superstruct';
 
-export const sString = s.string()
-export const sNullable_string_date = s.nullable(s.string())
-export const sString_date-time = s.string()
-export const sNullable_string_password = s.nullable(s.string())
-export const sString_byte = s.string()
-export const sNullable_string_binary = s.nullable(s.string())
-export const sNumber = s.number()
-export const sNullable_number_float = s.nullable(s.number())
-export const sNumber_double = s.number()
-export const sNullable_integer = s.nullable(s.integer())
-export const sInteger_int32 = s.integer()
-export const sNullable_integer_int64 = s.nullable(s.integer())
-export const sBoolean = s.boolean()
+const struct_String = s.string();
+const struct_Nullable_string_date = s.nullable(s.string());
+const struct_String_date-time = s.string();
+const struct_Nullable_string_password = s.nullable(s.string());
+const struct_String_byte = s.string();
+const struct_Nullable_string_binary = s.nullable(s.string());
+const struct_Number = s.number();
+const struct_Nullable_number_float = s.nullable(s.number());
+const struct_Number_double = s.number();
+const struct_Nullable_integer = s.nullable(s.integer());
+const struct_Integer_int32 = s.integer();
+const struct_Nullable_integer_int64 = s.nullable(s.integer());
+const struct_Boolean = s.boolean();
+
+export const structs = {
+  String: struct_String,
+  Nullable_string_date: struct_Nullable_string_date,
+  String_date-time: struct_String_date-time,
+  Nullable_string_password: struct_Nullable_string_password,
+  String_byte: struct_String_byte,
+  Nullable_string_binary: struct_Nullable_string_binary,
+  Number: struct_Number,
+  Nullable_number_float: struct_Nullable_number_float,
+  Number_double: struct_Number_double,
+  Nullable_integer: struct_Nullable_integer,
+  Integer_int32: struct_Integer_int32,
+  Nullable_integer_int64: struct_Nullable_integer_int64,
+  Boolean: struct_Boolean,
+};
+
+export type String = s.Infer<typeof structs['String']>;
+export type Nullable_string_date = s.Infer<typeof structs['Nullable_string_date']>;
+export type String_date-time = s.Infer<typeof structs['String_date-time']>;
+export type Nullable_string_password = s.Infer<typeof structs['Nullable_string_password']>;
+export type String_byte = s.Infer<typeof structs['String_byte']>;
+export type Nullable_string_binary = s.Infer<typeof structs['Nullable_string_binary']>;
+export type Number = s.Infer<typeof structs['Number']>;
+export type Nullable_number_float = s.Infer<typeof structs['Nullable_number_float']>;
+export type Number_double = s.Infer<typeof structs['Number_double']>;
+export type Nullable_integer = s.Infer<typeof structs['Nullable_integer']>;
+export type Integer_int32 = s.Infer<typeof structs['Integer_int32']>;
+export type Nullable_integer_int64 = s.Infer<typeof structs['Nullable_integer_int64']>;
+export type Boolean = s.Infer<typeof structs['Boolean']>;
 `);
     });
   });
@@ -156,10 +204,16 @@ export const sBoolean = s.boolean()
 
 import * as s from 'superstruct';
 
-export const sModelOne = s.object({
+const struct_ModelOne = s.object({
   string_field_one: s.string(),
   string_field_two: s.optional(s.string()),
 });
+
+export const structs = {
+  ModelOne: struct_ModelOne,
+};
+
+export type ModelOne = s.Infer<typeof structs['ModelOne']>;
 `);
     });
   });
