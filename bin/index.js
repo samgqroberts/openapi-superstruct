@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 'use strict';
 
@@ -17,13 +18,13 @@ const OpenAPISuperstruct = require(path.resolve(__dirname, '../dist/index.js'));
 
 if (OpenAPISuperstruct) {
   OpenAPISuperstruct.generate({
-    input: program.args[0],
+    input: program.args[0]
   })
     .then((output) => {
-      console.log(output)
+      console.log(output);
       process.exit(0);
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error);
       process.exit(1);
     });
