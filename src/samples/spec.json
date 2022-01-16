@@ -1,0 +1,20 @@
+{
+  "openapi": "3.0.2",
+  "components": {
+    "schemas": {
+      "ModelOne": {
+        "properties": {
+          "string_field_one": {
+            "type": "string"
+          },
+          "string_field_two": {
+            "type": "string"
+          }
+        },
+        "required": ["string_field_one"],
+        "type": "object"
+      }
+    }
+  },
+  "paths": {}
+}
