@@ -7,6 +7,7 @@ describe('sample-specs', () => {
     const validator = new OpenAPISchemaValidator({
       version: 3
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const readFile = (path: string): any => {
       return JSON.parse(readFileSync(path).toString());
     };
@@ -19,5 +20,10 @@ describe('sample-specs', () => {
     it('is a valid openapi spec', () =>
       expect(
         validate('./src/sample-specs/one-model-all-primitives.json')
+      ).toEqual([])));
+  describe('one-model-complex-types.json', () =>
+    it('is a valid openapi spec', () =>
+      expect(
+        validate('./src/sample-specs/one-model-complex-types.json')
       ).toEqual([])));
 });

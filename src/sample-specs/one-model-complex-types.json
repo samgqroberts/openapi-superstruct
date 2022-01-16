@@ -1,0 +1,101 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "one-model-all-complex-types",
+    "version": "1.0.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "ModelOne": {
+        "properties": {
+          "required_array<string>": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "required_nullable_array<string>": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "optional_array<string>": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "optional_nullable_array<string>": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "required_array<nullable_string>": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "deeply_nested_array": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "required_object": {
+            "type": "object",
+            "properties": {
+              "nested_required_string": {
+                "type": "string"
+              },
+              "nested_optional_nullable_integer": {
+                "type": "integer",
+                "nullable": true
+              },
+              "nested_required_array<boolean>": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              },
+              "nested_required_object": {
+                "type": "object",
+                "properties": {
+                  "doubly_nested_required_string": {
+                    "type": "string"
+                  }
+                },
+                "required": ["doubly_nested_required_string"]
+              }
+            },
+            "required": [
+              "nested_required_string",
+              "nested_required_array<boolean>",
+              "nested_required_object"
+            ]
+          }
+        },
+        "required": [
+          "required_array<string>",
+          "required_nullable_array<string>",
+          "required_array<nullable_string>",
+          "required_object"
+        ],
+        "type": "object"
+      }
+    }
+  }
+}
+
