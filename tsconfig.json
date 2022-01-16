@@ -9,6 +9,7 @@
       "dom"
     ],
     "types": [
+      "jest",
       "node"
     ],
     "declaration": false,

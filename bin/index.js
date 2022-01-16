@@ -19,7 +19,8 @@ if (OpenAPISuperstruct) {
   OpenAPISuperstruct.generate({
     input: program.args[0],
   })
-    .then(() => {
+    .then((output) => {
+      console.log(output)
       process.exit(0);
     })
     .catch(error => {

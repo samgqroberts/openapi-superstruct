@@ -1,12 +1,15 @@
-import { bundle } from 'json-schema-ref-parser'
-export interface Params {
-  input: string
+import { existsSync, writeFileSync } from 'fs'
+import $RefParser from 'json-schema-ref-parser'
+import { fileSync } from 'tmp'
+
+export interface GenerateParams {
+  input: string | object
 }
 
 export async function generate({
   input,
-}: Params): Promise<void> {
-  const spec = await parseInputFileOrThrow(input);
+}: GenerateParams): Promise<string> {
+  const spec = await parseInputOrThrow(input)
   const schemas = spec?.components?.schemas || {}
   const objects = Object.entries(schemas).map(([modelName, schema]: [string, any]) => {
     if (schema?.type === 'object') {
@@ -24,12 +27,33 @@ import * as s from 'superstruct';
 
 ${objects}
 `
-  console.log(file)
+  return file
+}
+
+async function parseInputOrThrow(input: string | object): Promise<any> {
+  if (typeof input === 'object') {
+    return parseInputObjectOrThrow(input);
+  }
+  if (existsSync(input)) {
+    return parseInputFileOrThrow(input);
+  }
+  return parseInputStringOrThrow(input);
+}
+
+const parseInputStringOrThrow = async (input: string): Promise<any> => {
+  return parseInputObjectOrThrow(JSON.parse(input));
+}
+
+async function parseInputObjectOrThrow(obj: object): Promise<any> {
+  const { fd, name: path } = fileSync();
+  writeFileSync(fd, JSON.stringify(obj))
+  const schema = await $RefParser.bundle(path, path, {})
+  return schema;
 }
 
 const parseInputFileOrThrow = async (location: string): Promise<any> => {
   try {
-    const schema = await bundle(location, location, {})
+    const schema = await $RefParser.bundle(location, location, {})
     return schema;
   } catch (e) {
     throw new Error(JSON.stringify(e))
