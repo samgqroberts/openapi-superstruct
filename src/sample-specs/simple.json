@@ -1,5 +1,10 @@
 {
   "openapi": "3.0.2",
+  "info": {
+    "title": "simple",
+    "version": "1.0.0"
+  },
+  "paths": {},
   "components": {
     "schemas": {
       "ModelOne": {
@@ -15,6 +20,5 @@
         "type": "object"
       }
     }
-  },
-  "paths": {}
+  }
 }

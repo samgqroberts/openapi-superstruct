@@ -16,8 +16,7 @@ export async function generate({ input }: GenerateParams): Promise<string> {
         const propertiesStr = Object.entries(schema.properties || {})
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           .map(([propertyName, type]: [string, any]) => {
-            const sType =
-              type?.type === 'string' ? 's.string()' : 's.unknown()';
+            const sType = deriveSType(propertyName, type, schema.required);
             return `  ${propertyName}: ${sType},`;
           })
           .join('\n');
@@ -33,6 +32,34 @@ import * as s from 'superstruct';
 ${objects}
 `;
   return file;
+}
+
+function deriveSType(
+  propertyName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type: any,
+  required: string[]
+): string {
+  if (!type) {
+    return 's.unknown()';
+  }
+  const base = type.type;
+  const isNullable = !!type.nullable;
+  const isOptional = !required.includes(propertyName);
+  const baseSType = (() => {
+    if (base === 'string') return 's.string()';
+    if (base === 'number') return 's.number()';
+    if (base === 'integer') return 's.integer()';
+    if (base === 'boolean') return 's.boolean()';
+    return 's.unknown()';
+  })();
+  const consideringNullable = isNullable
+    ? `s.nullable(${baseSType})`
+    : baseSType;
+  const consideringOptional = isOptional
+    ? `s.optional(${consideringNullable})`
+    : consideringNullable;
+  return consideringOptional;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

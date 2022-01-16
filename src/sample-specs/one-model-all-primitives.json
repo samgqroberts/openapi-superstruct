@@ -1,0 +1,263 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "one-model-all-primitives",
+    "version": "1.0.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "ModelOne": {
+        "properties": {
+          "required_string": {
+            "type": "string"
+          },
+          "required_nullable_string": {
+            "type": "string",
+            "nullable": true
+          },
+          "optional_string": {
+            "type": "string"
+          },
+          "optional_nullable_string": {
+            "type": "string",
+            "nullable": true
+          },
+          "required_string_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "required_nullable_string_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "optional_string_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "optional_nullable_string_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "required_string_date-time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "required_nullable_string_date-time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "optional_string_date-time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "optional_nullable_string_date-time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "required_string_password": {
+            "type": "string",
+            "format": "password"
+          },
+          "required_nullable_string_password": {
+            "type": "string",
+            "format": "password",
+            "nullable": true
+          },
+          "optional_string_password": {
+            "type": "string",
+            "format": "password"
+          },
+          "optional_nullable_string_password": {
+            "type": "string",
+            "format": "password",
+            "nullable": true
+          },
+          "required_string_byte": {
+            "type": "string",
+            "format": "byte"
+          },
+          "required_nullable_string_byte": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "optional_string_byte": {
+            "type": "string",
+            "format": "byte"
+          },
+          "optional_nullable_string_byte": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "required_string_binary": {
+            "type": "string",
+            "format": "binary"
+          },
+          "required_nullable_string_binary": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "optional_string_binary": {
+            "type": "string",
+            "format": "binary"
+          },
+          "optional_nullable_string_binary": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "required_number": {
+            "type": "number"
+          },
+          "required_nullable_number": {
+            "type": "number",
+            "nullable": true
+          },
+          "optional_number": {
+            "type": "number"
+          },
+          "optional_nullable_number": {
+            "type": "number",
+            "nullable": true
+          },
+          "required_number_float": {
+            "type": "number",
+            "format": "float"
+          },
+          "required_nullable_number_float": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "optional_number_float": {
+            "type": "number",
+            "format": "float"
+          },
+          "optional_nullable_number_float": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "required_number_double": {
+            "type": "number",
+            "format": "double"
+          },
+          "required_nullable_number_double": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "optional_number_double": {
+            "type": "number",
+            "format": "double"
+          },
+          "optional_nullable_number_double": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "required_integer": {
+            "type": "integer"
+          },
+          "required_nullable_integer": {
+            "type": "integer",
+            "nullable": true
+          },
+          "optional_integer": {
+            "type": "integer"
+          },
+          "optional_nullable_integer": {
+            "type": "integer",
+            "nullable": true
+          },
+          "required_integer_int32": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "required_nullable_integer_int32": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "optional_integer_int32": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "optional_nullable_integer_int32": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "required_integer_int64": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "required_nullable_integer_int64": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "optional_integer_int64": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "optional_nullable_integer_int64": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "required_boolean": {
+            "type": "boolean"
+          },
+          "required_nullable_boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "optional_boolean": {
+            "type": "boolean"
+          },
+          "optional_nullable_boolean": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "required_string",
+          "required_nullable_string",
+          "required_string_date",
+          "required_nullable_string_date",
+          "required_string_date-time",
+          "required_nullable_string_date-time",
+          "required_string_password",
+          "required_nullable_string_password",
+          "required_string_byte",
+          "required_nullable_string_byte",
+          "required_string_binary",
+          "required_nullable_string_binary",
+          "required_number",
+          "required_nullable_number",
+          "required_number_float",
+          "required_nullable_number_float",
+          "required_number_double",
+          "required_nullable_number_double",
+          "required_integer",
+          "required_nullable_integer",
+          "required_integer_int32",
+          "required_nullable_integer_int32",
+          "required_integer_int64",
+          "required_nullable_integer_int64",
+          "required_boolean",
+          "required_nullable_boolean"
+        ],
+        "type": "object"
+      }
+    }
+  }
+}
