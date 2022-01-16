@@ -26,4 +26,9 @@ describe('sample-specs', () => {
       expect(
         validate('./src/sample-specs/one-model-complex-types.json')
       ).toEqual([])));
+  describe('multiple-models-top-level-primitives.json', () =>
+    it('is a valid openapi spec', () =>
+      expect(
+        validate('./src/sample-specs/multiple-models-top-level-primitives.json')
+      ).toEqual([])));
 });

@@ -1,0 +1,66 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "multiple-models-top-level-primitives",
+    "version": "1.0.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "String": {
+        "type": "string"
+      },
+      "Nullable_string_date": {
+        "type": "string",
+        "format": "date",
+        "nullable": true
+      },
+      "String_date-time": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "Nullable_string_password": {
+        "type": "string",
+        "format": "password",
+        "nullable": true
+      },
+      "String_byte": {
+        "type": "string",
+        "format": "byte"
+      },
+      "Nullable_string_binary": {
+        "type": "string",
+        "format": "binary",
+        "nullable": true
+      },
+      "Number": {
+        "type": "number"
+      },
+      "Nullable_number_float": {
+        "type": "number",
+        "format": "float",
+        "nullable": true
+      },
+      "Number_double": {
+        "type": "number",
+        "format": "double"
+      },
+      "Nullable_integer": {
+        "type": "integer",
+        "nullable": true
+      },
+      "Integer_int32": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "Nullable_integer_int64": {
+        "type": "integer",
+        "format": "int64",
+        "nullable": true
+      },
+      "Boolean": {
+        "type": "boolean"
+      }
+    }
+  }
+}
