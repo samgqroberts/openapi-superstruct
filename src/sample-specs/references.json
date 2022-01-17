@@ -1,0 +1,50 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "multiple-models-misc-cases",
+    "version": "1.0.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "BasicModel": {
+        "properties": {
+          "some_model_one_field": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "some_model_one_field"
+        ],
+        "type": "object"
+      },
+      "IsReference": {
+        "$ref": "#/components/schemas/BasicModel"
+      },
+      "IsReferenceToReferer": {
+        "$ref": "#/components/schemas/IsReference"
+      },
+      "HasReferences": {
+        "properties": {
+          "reference_field": {
+            "$ref": "#/components/schemas/BasicModel"
+          }
+        },
+        "required": [
+          "reference_field"
+        ],
+        "type": "object"
+      },
+      "HasRecursiveReference": {
+        "properties": {
+          "recursive_reference_field": {
+            "$ref": "#/components/schemas/HasRecursiveReference"
+          }
+        },
+        "type": "object"
+      }
+    }
+  }
+}
+
+

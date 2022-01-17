@@ -1,0 +1,28 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "multiple-models-misc-cases",
+    "version": "1.0.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "Has spaces in name": {
+        "properties": {
+          "field with spaces": {
+            "type": "string"
+          },
+          "just has default": {
+            "default": "SOME VALUE"
+          }
+        },
+        "required": [
+          "field with spaces",
+          "just has default"
+        ],
+        "type": "object"
+      }
+    }
+  }
+}
+

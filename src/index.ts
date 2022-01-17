@@ -6,20 +6,26 @@ export interface GenerateParams {
   input: string | object;
 }
 
+function variableName(name: string): string {
+  return name.replace(/\s/g, '_');
+}
+
 export async function generate({ input }: GenerateParams): Promise<string> {
   const spec = await parseInputOrThrow(input);
   const schemas = spec?.components?.schemas || {};
   const components = Object.entries(schemas)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .map(([modelName, schema]: [string, any]) => {
-      const declaration = `const struct_${modelName} = ${deriveSType(
+      const varName = variableName(modelName);
+      const declaration = `const struct_${varName} = ${deriveSType(
         1,
+        modelName,
         null,
         schema,
         []
       )};`;
-      const struct = `  ${modelName}: struct_${modelName},`;
-      const type = `export type ${modelName} = s.Infer<typeof structs['${modelName}']>;`;
+      const struct = `  ${varName}: struct_${varName},`;
+      const type = `export type ${varName} = s.Infer<typeof structs['${varName}']>;`;
       return [declaration, struct, type];
     });
   const declarations = components.map((c) => c[0]).join('\n');
@@ -42,6 +48,7 @@ ${types}
 
 function deriveSType(
   indentation: number,
+  modelName: string,
   propertyName: string | null,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type: any,
@@ -60,7 +67,7 @@ function deriveSType(
     if (base === 'boolean') return 's.boolean()';
     if (base === 'array') {
       const items = type.items;
-      const nestedSType = deriveSType(indentation, null, items, []);
+      const nestedSType = deriveSType(indentation, modelName, null, items, []);
       return `s.array(${nestedSType})`;
     }
     if (base === 'object') {
@@ -71,6 +78,7 @@ function deriveSType(
         .map(([nestedPropertyName, nestedType]: [string, any]) => {
           const sType = deriveSType(
             indentation + 1,
+            modelName,
             nestedPropertyName,
             nestedType,
             type.required || []
@@ -80,6 +88,18 @@ function deriveSType(
         .join('\n');
       return `s.object({\n${propertiesStr}\n${indentationStr}})`;
     }
+    if (typeof type.default === 'string') {
+      return `s.literal("${type.default}")`;
+    }
+    if (typeof type.$ref === 'string') {
+      const ref = type.$ref as string;
+      if (ref.startsWith('#/components/schemas/')) {
+        const refName = ref.substring('#/components/schemas/'.length);
+        const structName = `struct_${variableName(refName)}`;
+        return structName;
+      }
+    }
+    console.warn('unknown', { propertyName, type, required });
     return 's.unknown()';
   })();
   const consideringNullable = isNullable
