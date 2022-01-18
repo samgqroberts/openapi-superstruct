@@ -48,6 +48,7 @@
   "dependencies": {
     "commander": "^8.3.0",
     "json-schema-ref-parser": "^9.0.9",
+    "superstruct": "^0.15.3",
     "tmp": "^0.2.1"
   }
 }
