@@ -4,23 +4,23 @@
 import * as s from 'superstruct';
 
 const struct_BasicModel = s.object({
-  some_model_one_field: s.string(),
+  "some_model_one_field": s.string(),
 });
 const struct_IsReference = struct_BasicModel;
 const struct_IsReferenceToReferer = struct_BasicModel;
 const struct_HasReferences = s.object({
-  reference_field: struct_BasicModel,
+  "reference_field": struct_BasicModel,
 });
 const struct_HasRecursiveReference = s.object({
-  recursive_reference_field: s.optional(struct_HasRecursiveReference),
+  "recursive_reference_field": s.optional(s.lazy(() => struct_HasRecursiveReference)),
 });
 
 export const structs = {
-  BasicModel: struct_BasicModel,
-  IsReference: struct_IsReference,
-  IsReferenceToReferer: struct_IsReferenceToReferer,
-  HasReferences: struct_HasReferences,
-  HasRecursiveReference: struct_HasRecursiveReference,
+  "BasicModel": struct_BasicModel,
+  "IsReference": struct_IsReference,
+  "IsReferenceToReferer": struct_IsReferenceToReferer,
+  "HasReferences": struct_HasReferences,
+  "HasRecursiveReference": struct_HasRecursiveReference,
 };
 
 export type BasicModel = s.Infer<typeof structs['BasicModel']>;

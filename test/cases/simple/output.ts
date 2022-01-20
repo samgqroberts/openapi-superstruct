@@ -4,12 +4,12 @@
 import * as s from 'superstruct';
 
 const struct_ModelOne = s.object({
-  string_field_one: s.string(),
-  string_field_two: s.optional(s.string()),
+  "string_field_one": s.string(),
+  "string_field_two": s.optional(s.string()),
 });
 
 export const structs = {
-  ModelOne: struct_ModelOne,
+  "ModelOne": struct_ModelOne,
 };
 
 export type ModelOne = s.Infer<typeof structs['ModelOne']>;

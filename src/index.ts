@@ -7,7 +7,7 @@ export interface GenerateParams {
 }
 
 function variableName(name: string): string {
-  return name.replace(/\s/g, '_');
+  return name.replace(/\s/g, '_').replace(/-/g, '_');
 }
 
 export async function generate({ input }: GenerateParams): Promise<string> {
@@ -24,7 +24,7 @@ export async function generate({ input }: GenerateParams): Promise<string> {
         schema,
         []
       )};`;
-      const struct = `  ${varName}: struct_${varName},`;
+      const struct = `  "${varName}": struct_${varName},`;
       const type = `export type ${varName} = s.Infer<typeof structs['${varName}']>;`;
       return [declaration, struct, type];
     });
@@ -84,7 +84,7 @@ function deriveSType(
             nestedType,
             type.required || []
           );
-          return `${nestedIndentationStr}${nestedPropertyName}: ${sType},`;
+          return `${nestedIndentationStr}"${nestedPropertyName}": ${sType},`;
         })
         .join('\n');
       return `s.object({\n${propertiesStr}\n${indentationStr}})`;
@@ -97,6 +97,9 @@ function deriveSType(
       if (ref.startsWith('#/components/schemas/')) {
         const refName = ref.substring('#/components/schemas/'.length);
         const structName = `struct_${variableName(refName)}`;
+        if (refName === modelName) {
+          return `s.lazy(() => ${structName})`
+        }
         return structName;
       }
     }

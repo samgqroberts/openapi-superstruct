@@ -1,3 +1,10 @@
+import './cases/all-primitives/output';
+import './cases/complex-types/output';
+import './cases/misc/output';
+import './cases/references/output';
+import './cases/simple/output';
+import './cases/top-level-primitives/output';
+
 import { readFileSync } from 'fs';
 import OpenAPISchemaValidator from 'openapi-schema-validator';
 
