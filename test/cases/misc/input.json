@@ -42,6 +42,9 @@
             "nullable": true
           }
         }
+      },
+      "OneOf": {
+        "oneOf": [{ "type": "string" }, { "type": "integer" }]
       }
     }
   }

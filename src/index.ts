@@ -117,6 +117,12 @@ function deriveSType(
         return `s.lazy(() => ${structName})`;
       }
     }
+    if (Array.isArray(type.oneOf)) {
+      const elementSTypes = type.oneOf.map((type) =>
+        deriveSType(indentation, modelName, null, type, [])
+      );
+      return `s.union([${elementSTypes.join(', ')}])`;
+    }
     console.warn('unknown', { propertyName, type, required });
     return 's.unknown()';
   })();
