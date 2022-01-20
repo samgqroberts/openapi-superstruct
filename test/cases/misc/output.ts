@@ -7,9 +7,18 @@ const struct_Has_spaces_in_name = s.object({
   "field with spaces": s.string(),
   "just has default": s.literal("SOME VALUE"),
 });
+const struct_AdditionalProperties = s.record(s.string(), s.integer());
+const struct_HasOptionalAdditionalProperties = s.object({
+  "optional_additionalProperties": s.optional(s.record(s.string(), s.boolean())),
+  "optional_nullable_additionalProperties": s.optional(s.nullable(s.record(s.string(), s.string()))),
+});
 
 export const structs = {
   "Has_spaces_in_name": struct_Has_spaces_in_name,
+  "AdditionalProperties": struct_AdditionalProperties,
+  "HasOptionalAdditionalProperties": struct_HasOptionalAdditionalProperties,
 };
 
 export type Has_spaces_in_name = s.Infer<typeof structs['Has_spaces_in_name']>;
+export type AdditionalProperties = s.Infer<typeof structs['AdditionalProperties']>;
+export type HasOptionalAdditionalProperties = s.Infer<typeof structs['HasOptionalAdditionalProperties']>;

@@ -16,14 +16,33 @@
             "default": "SOME VALUE"
           }
         },
-        "required": [
-          "field with spaces",
-          "just has default"
-        ],
+        "required": ["field with spaces", "just has default"],
         "type": "object"
+      },
+      "AdditionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "integer"
+        }
+      },
+      "HasOptionalAdditionalProperties": {
+        "type": "object",
+        "properties": {
+          "optional_additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            }
+          },
+          "optional_nullable_additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
       }
     }
   }
 }
-
-

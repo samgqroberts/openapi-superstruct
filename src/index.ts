@@ -79,6 +79,16 @@ function deriveSType(
       return `s.array(${nestedSType})`;
     }
     if (base === 'object') {
+      if (type.additionalProperties) {
+        const nestedType = deriveSType(
+          indentation + 1,
+          modelName,
+          null,
+          type.additionalProperties,
+          []
+        );
+        return `s.record(s.string(), ${nestedType})`;
+      }
       const indentationStr = Array(indentation).join('  ');
       const nestedIndentationStr = indentationStr + '  ';
       const propertiesStr = Object.entries(type.properties || {})
@@ -104,10 +114,7 @@ function deriveSType(
       if (ref.startsWith('#/components/schemas/')) {
         const refName = ref.substring('#/components/schemas/'.length);
         const structName = `struct_${variableName(refName)}`;
-        if (refName === modelName) {
-          return `s.lazy(() => ${structName})`
-        }
-        return structName;
+        return `s.lazy(() => ${structName})`;
       }
     }
     console.warn('unknown', { propertyName, type, required });
