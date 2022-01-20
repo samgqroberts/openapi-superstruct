@@ -4,13 +4,17 @@ import { fileSync } from 'tmp';
 
 export interface GenerateParams {
   input: string | object;
+  output?: string;
 }
 
 function variableName(name: string): string {
   return name.replace(/\s/g, '_').replace(/-/g, '_');
 }
 
-export async function generate({ input }: GenerateParams): Promise<string> {
+export async function generate({
+  input,
+  output
+}: GenerateParams): Promise<string> {
   const spec = await parseInputOrThrow(input);
   const schemas = spec?.components?.schemas || {};
   const components = Object.entries(schemas)
@@ -44,6 +48,9 @@ ${structs}
 
 ${types}
 `;
+  if (output) {
+    writeFileSync(output, file);
+  }
   return file;
 }
 

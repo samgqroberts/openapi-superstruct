@@ -12,13 +12,18 @@ program
   .usage('[options]')
   .version(pkg.version)
   .argument('<input>', 'OpenAPI specification file (required)')
+  .option('-o <value>', 'Output file name')
   .parse(process.argv);
+
+const args = program.args;
+const opts = program.opts();
 
 const OpenAPISuperstruct = require(path.resolve(__dirname, '../dist/index.js'));
 
 if (OpenAPISuperstruct) {
   OpenAPISuperstruct.generate({
-    input: program.args[0]
+    input: args[0],
+    output: opts.o
   })
     .then((output) => {
       console.log(output);
