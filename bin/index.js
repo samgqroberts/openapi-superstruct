@@ -26,7 +26,11 @@ if (OpenAPISuperstruct) {
     output: opts.o
   })
     .then((output) => {
-      console.log(output);
+      if (opts.o) {
+        console.log(`Successfully wrote to file ${output}`);
+      } else {
+        console.log(output);
+      }
       process.exit(0);
     })
     .catch((error) => {

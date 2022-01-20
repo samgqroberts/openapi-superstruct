@@ -1,5 +1,6 @@
-import { existsSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import $RefParser from 'json-schema-ref-parser';
+import { dirname, resolve } from 'path';
 import { fileSync } from 'tmp';
 
 export interface GenerateParams {
@@ -49,7 +50,10 @@ ${structs}
 ${types}
 `;
   if (output) {
-    writeFileSync(output, file);
+    const absolute = resolve(output);
+    mkdirSync(dirname(absolute), { recursive: true });
+    writeFileSync(absolute, file);
+    return absolute;
   }
   return file;
 }
@@ -123,7 +127,6 @@ function deriveSType(
       );
       return `s.union([${elementSTypes.join(', ')}])`;
     }
-    console.warn('unknown', { propertyName, type, required });
     return 's.unknown()';
   })();
   const consideringNullable = isNullable
