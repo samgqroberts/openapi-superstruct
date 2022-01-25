@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import $RefParser from 'json-schema-ref-parser';
+import fetch from 'node-fetch';
 import { dirname, resolve } from 'path';
 import { fileSync } from 'tmp';
 
@@ -122,7 +123,7 @@ function deriveSType(
       }
     }
     if (Array.isArray(type.oneOf)) {
-      const elementSTypes = type.oneOf.map((type) =>
+      const elementSTypes = type.oneOf.map((type: unknown) =>
         deriveSType(indentation, modelName, null, type, [])
       );
       return `s.union([${elementSTypes.join(', ')}])`;
@@ -143,11 +144,19 @@ async function parseInputOrThrow(input: string | object): Promise<any> {
   if (typeof input === 'object') {
     return parseInputObjectOrThrow(input);
   }
+  if (input.startsWith('http://') || input.startsWith('https://')) {
+    return parseInputFromUrl(input);
+  }
   if (existsSync(input)) {
     return parseInputFileOrThrow(input);
   }
   return parseInputStringOrThrow(input);
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const parseInputFromUrl = (url: string): Promise<any> => {
+  return fetch(url).then((r) => r.json());
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const parseInputStringOrThrow = async (input: string): Promise<any> => {
