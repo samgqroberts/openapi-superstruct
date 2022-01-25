@@ -1,12 +1,24 @@
 {
   "name": "openapi-superstruct",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "NodeJS library for generating Superstruct model definitions from OpenAPI specs",
-  "author": "samgqroberts",
+  "author": {
+    "name": "samgqroberts"
+  },
+  "homepage": "https://github.com/samgqroberts/openapi-superstruct",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ferdikoomen/openapi-superstruct.git"
+  },
+  "bugs": {
+    "url": "https://github.com/samgqroberts/openapi-superstruct/issues"
+  },
   "license": "MIT",
   "keywords": [
     "openapi",
-    "superstruct"
+    "superstruct",
+    "typescript",
+    "generate"
   ],
   "main": "dist/index.js",
   "files": [
