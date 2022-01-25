@@ -66,17 +66,29 @@ export type Model = s.Infer<typeof structs['Model']>;
     });
   });
   describe('http input', () => {
-    const input =
-      'http://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json';
-    it('is allowed', async () => {
+    it('works for json', async () => {
+      const input =
+        'http://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json';
+      const file = await generate({ input });
+      expect(file).toEqual(expectedPetStoreFile);
+    });
+    it('works for yaml', async () => {
+      const input =
+        'http://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.yaml';
       const file = await generate({ input });
       expect(file).toEqual(expectedPetStoreFile);
     });
   });
   describe('https input', () => {
-    const input =
-      'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json';
-    it('is allowed', async () => {
+    it('works for json', async () => {
+      const input =
+        'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json';
+      const file = await generate({ input });
+      expect(file).toEqual(expectedPetStoreFile);
+    });
+    it('works for yaml', async () => {
+      const input =
+        'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.yaml';
       const file = await generate({ input });
       expect(file).toEqual(expectedPetStoreFile);
     });
