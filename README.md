@@ -1,5 +1,7 @@
 # OpenAPI Superstruct
 
+![npm](https://img.shields.io/npm/v/openapi-superstruct)
+
 Node.js library that generates [Superstruct](https://docs.superstructjs.org/) definitions based on an OpenAPI spec.
 
 Note: this project is under active development.
