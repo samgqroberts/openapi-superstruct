@@ -1,8 +1,7 @@
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import $RefParser from 'json-schema-ref-parser';
-import fetch from 'node-fetch';
+import { mkdirSync, writeFileSync } from 'fs';
 import { dirname, resolve } from 'path';
-import { fileSync } from 'tmp';
+
+import { parseInputOrThrow } from './parseInput';
 
 export interface GenerateParams {
   input: string | object;
@@ -138,45 +137,3 @@ function deriveSType(
     : consideringNullable;
   return consideringOptional;
 }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function parseInputOrThrow(input: string | object): Promise<any> {
-  if (typeof input === 'object') {
-    return parseInputObjectOrThrow(input);
-  }
-  if (input.startsWith('http://') || input.startsWith('https://')) {
-    return parseInputFromUrl(input);
-  }
-  if (existsSync(input)) {
-    return parseInputFileOrThrow(input);
-  }
-  return parseInputStringOrThrow(input);
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const parseInputFromUrl = (url: string): Promise<any> => {
-  return fetch(url).then((r) => r.json());
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const parseInputStringOrThrow = async (input: string): Promise<any> => {
-  return parseInputObjectOrThrow(JSON.parse(input));
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function parseInputObjectOrThrow(obj: object): Promise<any> {
-  const { fd, name: path } = fileSync();
-  writeFileSync(fd, JSON.stringify(obj));
-  const schema = await $RefParser.bundle(path, path, {});
-  return schema;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const parseInputFileOrThrow = async (location: string): Promise<any> => {
-  try {
-    const schema = await $RefParser.bundle(location, location, {});
-    return schema;
-  } catch (e) {
-    throw new Error(JSON.stringify(e));
-  }
-};
