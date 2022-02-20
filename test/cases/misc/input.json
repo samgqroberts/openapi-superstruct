@@ -19,6 +19,9 @@
         "required": ["field with spaces", "just has default"],
         "type": "object"
       },
+      "EmptyObject": {
+        "type": "object"
+      },
       "AdditionalProperties": {
         "type": "object",
         "additionalProperties": {

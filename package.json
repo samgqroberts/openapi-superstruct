@@ -1,6 +1,6 @@
 {
   "name": "openapi-superstruct",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NodeJS library for generating Superstruct model definitions from OpenAPI specs",
   "author": {
     "name": "samgqroberts"

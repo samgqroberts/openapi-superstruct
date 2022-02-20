@@ -7,12 +7,13 @@ const path = require('path');
 const program = require('commander');
 const pkg = require('../package.json');
 
+// TODO samgqroberts 2022-02-20 should complain if multiple positional args are supplied
 program
   .name('openapi-superstruct')
   .usage('[options]')
   .version(pkg.version)
   .argument('<input>', 'OpenAPI specification file (required)')
-  .option('-o <value>', 'Output file name')
+  .option('-o <value>', 'Output file name') // TODO samgqroberts 2022-02-20 include --output as alias
   .parse(process.argv);
 
 const args = program.args;

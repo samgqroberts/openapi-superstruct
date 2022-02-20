@@ -93,22 +93,25 @@ function deriveSType(
         );
         return `s.record(s.string(), ${nestedType})`;
       }
-      const indentationStr = Array(indentation).join('  ');
-      const nestedIndentationStr = indentationStr + '  ';
-      const propertiesStr = Object.entries(type.properties || {})
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .map(([nestedPropertyName, nestedType]: [string, any]) => {
-          const sType = deriveSType(
-            indentation + 1,
-            modelName,
-            nestedPropertyName,
-            nestedType,
-            type.required || []
-          );
-          return `${nestedIndentationStr}"${nestedPropertyName}": ${sType},`;
-        })
-        .join('\n');
-      return `s.object({\n${propertiesStr}\n${indentationStr}})`;
+      if (type.properties) {
+        const indentationStr = Array(indentation).join('  ');
+        const nestedIndentationStr = indentationStr + '  ';
+        const propertiesStr = Object.entries(type.properties || {})
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .map(([nestedPropertyName, nestedType]: [string, any]) => {
+            const sType = deriveSType(
+              indentation + 1,
+              modelName,
+              nestedPropertyName,
+              nestedType,
+              type.required || []
+            );
+            return `${nestedIndentationStr}"${nestedPropertyName}": ${sType},`;
+          })
+          .join('\n');
+        return `s.object({\n${propertiesStr}\n${indentationStr}})`;
+      }
+      return `s.record(s.string(), s.unknown())`;
     }
     if (typeof type.default === 'string') {
       return `s.literal("${type.default}")`;
