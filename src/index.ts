@@ -58,6 +58,7 @@ ${types}
   return file;
 }
 
+// TODO samgqroberts 2022-02-20 look at description field and generate comments
 function deriveSType(
   indentation: number,
   modelName: string,
