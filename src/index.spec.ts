@@ -28,6 +28,46 @@ export const structs = {
 export type Pet = s.Infer<typeof structs['Pet']>;
 export type Pets = s.Infer<typeof structs['Pets']>;
 export type Error = s.Infer<typeof structs['Error']>;
+
+interface PreparedGet {
+  method: 'get';
+  url: string;
+}
+interface PreparedPut<Body> {
+  method: 'put';
+  url: string;
+  body: Body;
+}
+interface PreparedPost<Body> {
+  method: 'post';
+  url: string;
+  body: Body;
+}
+interface PreparedDelete {
+  method: 'delete';
+  url: string;
+}
+interface PreparedPatch<Body> {
+  method: 'patch';
+  url: string;
+  body: Body;
+}
+
+const path_listPets = (limit: number): PreparedGet => {
+  const method = 'get';
+  const url = '/pets';
+  return { method, url };
+}
+const path_createPets = (): PreparedPost<unknown> => {
+  const method = 'post';
+  const url = '/pets';
+  return { method, url };
+}
+const path_showPetById = (petId: string): PreparedGet => {
+  const method = 'get';
+  const url = '/pets/{petId}';
+  return { method, url };
+}
 `;
 
 describe('generate', () => {

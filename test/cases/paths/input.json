@@ -1,0 +1,210 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "multiple-models-misc-cases",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/things": {
+      "get": {
+        "description": "get things description",
+        "operationId": "get_things",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Thing"
+                  }
+                }
+              }
+            },
+            "description": "successfully gotten things list"
+          }
+        }
+      },
+      "post": {
+        "description": "create thing description",
+        "operationId": "create_thing",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateThingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Thing"
+                }
+              }
+            },
+            "description": "successfully created thing"
+          }
+        }
+      }
+    },
+    "/things/{id}": {
+      "delete": {
+        "description": "delete thing description",
+        "operationId": "delete_thing",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No response body"
+          }
+        }
+      },
+      "get": {
+        "description": "get thing description",
+        "operationId": "get_thing",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Thing"
+                }
+              }
+            },
+            "description": "successfully gotten Thing"
+          }
+        }
+      },
+      "put": {
+        "description": "update thing description",
+        "operationId": "update_thing",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateThingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Thing"
+                }
+              }
+            },
+            "description": "successfully updated thing"
+          }
+        }
+      },
+      "patch": {
+        "description": "patch thing description",
+        "operationId": "patch_thing",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchThingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Thing"
+                }
+              }
+            },
+            "description": "successfully patched thing"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Thing": {
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "subthing_field": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "subthing_field"
+        ]
+      },
+      "CreateThingRequest": {
+        "properties": {
+          "subthing_field": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subthing_field"
+        ]
+      },
+      "PatchThingRequest": {
+        "properties": {
+          "subthing_field": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  }
+}
