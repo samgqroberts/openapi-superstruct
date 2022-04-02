@@ -1,6 +1,7 @@
 import './cases/all-primitives/output';
 import './cases/complex-types/output';
 import './cases/misc/output';
+import './cases/paths/output';
 import './cases/references/output';
 import './cases/simple/output';
 import './cases/top-level-primitives/output';
@@ -14,6 +15,7 @@ const cases = [
   'all-primitives',
   'complex-types',
   'misc',
+  'paths',
   'references',
   'simple',
   'top-level-primitives'
